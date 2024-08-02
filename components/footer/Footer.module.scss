@@ -1,0 +1,106 @@
+.footer {
+    background-color: #1b1b1b;
+    color: #ffffff;
+    padding: 20px;
+}
+
+.footerContainer {
+    display: flex;
+    // justify-content: center;
+    // margin-left: auto;
+    // margin-right: auto;
+    margin: 0px auto;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1350px;
+    padding: 20px;
+    // border-bottom: 1px solid #444;
+    // background: #c17878;
+}
+
+.footerLogo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.logoImg {
+    width: 50px;
+    margin-right: 10px;
+}
+
+.footerContacts, .footerSubscribe, .footerSocial {
+    flex: 1;
+}
+
+.footerAddress {
+    flex: 1;
+    display: flex;
+    // justify-content: center;
+    margin-right: 20px;
+    margin-top: 30px;
+}
+
+.footerContacts h4, .footerSubscribe h4 {
+    margin-bottom: 10px;
+}
+
+.footerContacts p, .footerSubscribe p {
+    margin: 5px 0;
+}
+
+.subscribeInput {
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.subscribeButton {
+    padding: 10px 77px;
+    border: none;
+    background-color: #ffd700;
+    color: #1b1b1b;
+    border-radius: 5px;
+    margin-top: 16px;
+    cursor: pointer;
+}
+
+.socialIcon {
+    margin-top: 16px;
+    // gap: 20px;
+    margin-left: 10px;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+
+.subscribeButton:hover {
+    background-color: #e6b800;
+}
+
+.footerSocial a img {
+    width: 30px;
+    margin-right: 10px;
+}
+
+.footerLegal {
+    max-width: 1250px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-top: 1px solid #444;
+}
+
+.footerLegal a {
+    color: #ffffff;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.footerLegal a:hover {
+    text-decoration: underline;
+}
