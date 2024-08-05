@@ -2,14 +2,32 @@ import Image from "next/image";
 import img5 from "../../assets/images/pngegg (34) 3.png";
 import img6 from "../../assets/images/pngegg (34) 9.png";
 import img7 from "../../assets/images/pngegg (34) 10.png";
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import Link from "next/link";
 import Cookie from "js-cookie";
 import { useState, useEffect } from "react";
 import { getProduct } from "@/service/product.service";
 import { postLike } from "@/service/wishlist.service";
 
-const Section = ({ title, defaultImage, data, postData, isTokenExist }) => {
+// Define the Product type
+type Product = {
+  product_id: string;
+  product_name: string;
+  cost: number;
+  discount?: number;
+  image_url?: string[];
+  liked?: boolean;
+};
+
+type SectionProps = {
+  title: string;
+  defaultImage: string;
+  data: Product[];
+  postData: (id: string) => void;
+  isTokenExist: boolean;
+};
+
+const Section = ({ title, defaultImage, data, postData, isTokenExist }: SectionProps) => {
   return (
     <div>
       <div className="flex justify-between items-center mb-4 flex-wrap px-6">
@@ -28,7 +46,7 @@ const Section = ({ title, defaultImage, data, postData, isTokenExist }) => {
                   className="absolute right-[20px] top-[20px] cursor-pointer"
                   onClick={() => postData(product.product_id)}
                 >
-                  <HeartOutlined />
+                  {product.liked ? <HeartFilled style={{ color: 'red' }} /> : <HeartOutlined />}
                 </div>
               )}
               <div className="w-[150px] h-[194px] grid justify-center items-center z-[999]">
@@ -46,7 +64,7 @@ const Section = ({ title, defaultImage, data, postData, isTokenExist }) => {
                 <p className="text-red-700 font-bold text-[16px] sm:text-[18px] md:text-[20px]">
                   {product.cost} uzs
                 </p>
-                {title === "Акция" && product.discount > 0 && (
+                {title === "Акция" && product.discount && product.discount > 0 && (
                   <span className="line-through opacity-50 text-[#1F1D14] text-[12px] sm:text-[14px] md:text-[16px]">
                     {Math.ceil(product.cost / (1 - product.discount / 100))} uzs
                   </span>
@@ -68,7 +86,7 @@ const Section = ({ title, defaultImage, data, postData, isTokenExist }) => {
 };
 
 export default function Cards() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Product[]>([]);
   const [isTokenExist, setIsTokenExist] = useState(false);
 
   useEffect(() => {
@@ -94,11 +112,15 @@ export default function Cards() {
     getData();
   }, []);
 
-  const postData = async (id) => {
+  const postData = async (id: string) => {
     try {
-      const response = await postLike(id);
+      const response:any= await postLike(id);
       if (response && response.status === 201) {
-        console.log(response.data);
+        setData(prevData =>
+          prevData.map(product =>
+            product.product_id === id ? { ...product, liked: !product.liked } : product
+          )
+        );
       } else {
         console.error('Error posting like:', response.statusText);
       }
@@ -108,34 +130,35 @@ export default function Cards() {
   };
 
   return (
-    <div>
-      <div className="max-w-[1240px] mx-auto ">
-        <Section
-          title="Акция"
-          defaultImage={img5}
-          data={data}
-          postData={postData}
-          isTokenExist={isTokenExist}
-        />
-      </div>
-      <div className="max-w-[1240px] mx-auto mt-[70px]">
-        <Section
-          title="Новинки"
-          defaultImage={img6}
-          data={data}
-          postData={postData}
-          isTokenExist={isTokenExist}
-        />
-      </div>
-      <div className="max-w-[1240px] mx-auto mt-[70px]">
-        <Section
-          title="Продукты"
-          defaultImage={img7}
-          data={data}
-          postData={postData}
-          isTokenExist={isTokenExist}
-        />
-      </div>
+    <div className="flex flex-col items-center">
+    <div className="max-w-[1240px] w-full mx-auto">
+      <Section
+        title="Акция"
+        defaultImage={img5.src}
+        data={data}
+        postData={postData}
+        isTokenExist={isTokenExist}
+      />
     </div>
+    <div className="max-w-[1240px] w-full mx-auto mt-[70px]">
+      <Section
+        title="Новинки"
+        defaultImage={img6.src}
+        data={data}
+        postData={postData}
+        isTokenExist={isTokenExist}
+      />
+    </div>
+    <div className="max-w-[1240px] w-full mx-auto mt-[70px]">
+      <Section
+        title="Продукты"
+        defaultImage={img7.src}
+        data={data}
+        postData={postData}
+        isTokenExist={isTokenExist}
+      />
+    </div>
+  </div>
+  
   );
 }
