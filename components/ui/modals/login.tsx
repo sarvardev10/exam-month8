@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Input, Modal, notification } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import Register from "./register";
 import { Login } from "@/service/auth.service";
 import "./style.css";
 
@@ -72,7 +71,7 @@ const App: React.FC = () => {
         >
           <h1 className="text-[24px] font-medium">Вход в аккаунт</h1>
           <p className="w-[270px] text-[12px]">
-            Если Вы не зарегистрированы, нажмите кнопку <Register />
+            Если Вы не зарегистрированы, нажмите кнопку 
           </p>
           <Input
             placeholder="Email"
