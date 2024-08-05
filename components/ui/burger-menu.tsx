@@ -1,9 +1,8 @@
 "use client"
 import React, { useState } from 'react';
-import { Menu, Drawer, Button } from 'antd';
+import { Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
-
-const { SubMenu } = Menu;
+import Link from "next/link";
 
 const App = () => {
   const [visible, setVisible] = useState(false);
@@ -30,18 +29,20 @@ const App = () => {
         onClose={closeDrawer}
         visible={visible}
       >
-        <Menu
-          mode="inline"
-          style={{ height: '100%', borderRight: 0 }}
-        >
-          <Menu.Item key="1">Home</Menu.Item>
-          <Menu.Item key="2">About</Menu.Item>
-          <SubMenu key="sub1" title="Services">
-            <Menu.Item key="3">Service 1</Menu.Item>
-            <Menu.Item key="4">Service 2</Menu.Item>
-          </SubMenu>
-          <Menu.Item key="5">Contact</Menu.Item>
-        </Menu>
+        <div className="flex flex-col space-y-4">
+          <li className="text-xl list-none">
+            <Link href="/products">Продукты</Link>
+          </li>
+          <li className="text-xl list-none">
+            <Link href="/contact">Контакты</Link>
+          </li>
+          <li className="text-xl list-none">
+            <Link href="/pay">Оплата и Доставка</Link>
+          </li>
+          <li className="text-xl list-none">
+            <Link href="/about">О нас</Link>
+          </li>
+        </div>
       </Drawer>
     </div>
   );
