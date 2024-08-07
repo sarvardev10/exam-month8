@@ -30,8 +30,8 @@ type SectionProps = {
 const Section = ({ title, defaultImage, data, postData, isTokenExist }: SectionProps) => {
   return (
     <div>
-      <div className="flex justify-between items-center mb-4 flex-wrap px-6">
-        <h1 className="text-[24px]">{title}</h1>
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-4 flex-wrap px-6">
+        <h1 className="text-[24px] text-center sm:text-left">{title}</h1>
         <div className="flex gap-3">
           {/* <button className="bg-white w-[40px] h-[40px] rounded-full">{"<"}</button>
           <button className="bg-white w-[40px] h-[40px] rounded-full">{">"}</button> */}
@@ -130,7 +130,7 @@ export default function Cards() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col text-center sm:text-center lg:text-left">
     <div className="max-w-[1240px] w-full mx-auto">
       <Section
         title="Акция"

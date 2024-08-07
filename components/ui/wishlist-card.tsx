@@ -1,5 +1,5 @@
 "use client";
-import { HeartOutlined } from "@ant-design/icons";
+import { HeartFilled} from "@ant-design/icons";
 import Image from "next/image";
 import Link from "next/link";
 import Cookies from "js-cookie";
@@ -33,10 +33,10 @@ export default function WishlistCard() {
           className="relative w-[250px] h-[350px] bg-white flex flex-col items-center justify-between shadow-md"
         >
           <div
-            className="absolute right-[20px] top-[20px] cursor-pointer"
+            className="absolute right-[20px] top-[20px] text-red-500  cursor-pointer"
             onClick={() => postData(product.product_id)}
           >
-            <HeartOutlined />
+            <HeartFilled />
           </div>
           <div className="w-[150px] h-[194px] grid justify-center items-center z-[999]">
             <Image
